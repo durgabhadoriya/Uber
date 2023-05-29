@@ -48,17 +48,30 @@ class GetOrdersViews(APIView):
         return Response(serializer.data)
     
     def post(self,request):
-            
-            params = request.data
-            print("params",params)
+        
+        params = request.data
+        print("params",params)
 
-            serializer = OrdersSerializers(data=params)
-            if serializer.is_valid():
-                serializer.save()
-                return Response({"Order":"reached!!"})
-            else:
-                print("error",serializer.errors)
-                return Response({"Error":str(serializer.errors)})
+        serializer = OrdersSerializers(data=params)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
 
-                
- 
+        return Response({"messege","Done"})
+    
+class DeleteStudentsView(APIView):
+    def get(self,request,pk):
+        instance = Students.objects.get(id=pk)
+        instance.delete()
+        
+        return Response({"messege","delete"}) 
+    
+class StudentsDetailsAddressViews(APIView):
+    def get(self,request,pk):
+        instance = Students.objects.filter(id=pk)
+        serializer = StudentsDetailsAddressSerializers(instance,many=True)
+        
+        return Response({"serializer.data"}) 
+    
+
+    
+
