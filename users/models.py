@@ -30,7 +30,8 @@ class Orders(models.Model):
         return str(self.order_name)
 
 class StudentsAddress(models.Model):
-    students = models.ForeignKey(Students,on_delete=models.CASCADE,null=True)
+    students = models.ForeignKey(Students,on_delete=models.CASCADE,null=True,
+                                 related_name="student_addresses")
     street_name = models.CharField(max_length=19,null=True,blank=True)
     house_number = models.IntegerField(max_length=5,null=True,blank=True)
     city = models.CharField(max_length=18,null=True,blank=True)
