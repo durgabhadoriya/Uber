@@ -78,6 +78,17 @@ class StudentsAddressDeleteView(APIView):
         addresses = StudentsAddress.objects.filter(students=instance)
         addresses.delete()
         return Response({"messege_successfully"})
+    
+class StudentsUpdateView(APIView):
+     def post(self,request,pk):
+        
+        params = request.data
+        print("params",params)
+
+        student = Students.objects.filter(id=pk).update(**params)
+        return Response({"Updated"})
+    
+    
 
     
 
